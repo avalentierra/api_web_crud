@@ -27,3 +27,5 @@ python manage.py makemigrations
 // crear usuario para administrar la base de datos 
 
 python manage.py createsuperuser
+
+https://www.youtube.com/watch?v=GE0Q8YNKNgs
