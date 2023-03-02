@@ -1,0 +1,98 @@
+{% extends './index.html' %}
+{% block title %} Gestionar Direciones {% endblock %}
+{%  block content %}
+{% load static%}
+<html> 
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        
+        
+       
+    </head>
+    <body>
+        <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+            <div class="card">
+                <div class="card-body ">
+                    <form action="/registrarDirecc/" method="POST">{% csrf_token %}
+                        
+                        <div class="form-group py-2"> 
+                            <input type="text" id="txtdireccion" name="txtdirecciont" class="form-control" placeholder="Direccion" required>
+                        </div>
+                        <div class="form-group py-2"> 
+                            <input type="text" id="txtbarrio" name="txtbarrio" class="form-control" placeholder="Barrio/sector" required>
+                        </div>
+                        <div class="form-group py-2"> 
+                            <input type="text" id="txtciudad" name="txtciudad" class="form-control" placeholder="Ciudad" required>
+                        </div>
+                        <div class="form-group py-2"> 
+                            <input type="text" id="txtdepartamento" name="txtdepartamento" class="form-control" placeholder="Departamento/estado" required>
+                        </div>
+                        <div class="form-group py-2"> 
+                            <input type="text" id="txtpostal" name="txtpostal" class="form-control" placeholder="Codigo Postal" required>
+                        </div>
+                        
+                       
+                        <div class="form-group py-2"> 
+                            <button type="submit" class="btn-success btn-block text-while">Guardar</button>
+                        </div>
+
+                    </form>
+                    
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8"> 
+            <div class="table-responsive"> 
+                <table class="table table-stiped">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Direcciones</th>
+                        <th scope="col">Barrio</th>
+                        <th scope="col">Ciudad</th>
+                        <th scope="col">Departamento</th>
+                        <th scope="col">Codigo Postal</th>
+                    
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if direcciones %}
+                    {% for direccionD in direcciones %}
+                     
+                    <tr>
+                        <td scope="row">{{direccionD.codigo_d}}</td>
+                        <td>{{direccionD.direccion}}</td>
+                        <td>{{direccionD.barrio_sector}}</td>
+                        <td>{{direccionD.ciudad}}</td>
+                        <td>{{direccionD.departamento_provincia}}</td>
+                        <td>{{direccionD.codigo_postal}}</td>
+                        <td><a  href="/edicionDireciones/{{direccionD.id}}" id="edit-dirc" class="btn btn-info"> Editar</a> </td>
+                        <td><a id="Elimi-direcion" onclick="fnDel('Elimi-direcion','/eliminacionDireciones/')" class="btn btn-danger btnEliminacion"> Eliminar</a> </td>
+                        
+                    </tr>
+                    {% endfor %}
+                    
+                    {% endif %}
+                    </tbody>
+                </table>
+            </di>
+        </div>
+        </div>
+          
+        
+    
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="{% static 'js/scripts.js' %}"></script>
+    </body>
+</html>
+
+{% endblock %}

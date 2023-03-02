@@ -1,0 +1,59 @@
+{% extends './index.html' %}
+{% block title %} REGISTRAR CATEGORIA {% endblock %}
+{%  block content %}
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+      <div class="card">
+          <div class="card-body ">
+              <form action="/registrarCategory/" method="POST">{% csrf_token %}
+                  
+                
+                  <div class="form-group py-2"> 
+                      <input type="text" id="txtCategoriaProducto" name="txtCategoriaProducto" class="form-control" placeholder=" Nombre categoria" >
+                  </div>
+                  
+                  <div class="form-group py-2"> 
+                      <button type="submit" class="btn-success btn-block text-while">Guardar</button>
+                  </div>
+
+              </form>
+              
+
+          </div>
+      </div>
+
+  </div>
+
+  <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8"> 
+      <div class="table-responsive py-2"> 
+          <table class="table table-stiped">
+              <thead>
+              <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Nombres</th>
+                  <th colspan="2">Opciones</th>
+               
+
+              </tr>
+              </thead>
+              <tbody>
+              {% if categorias %}
+              {% for categoria in categorias %}
+              
+              <tr>
+                  <td scope="row">{{categoria.id}}</td>
+                  <td> {{categoria.nombre_categoria}}</td>
+                 
+                  <td><a  href="/edicionCategorias/{{categoria.id}}" class="btn btn-info"> Editar</a> </td>
+                  <td><a id="Elimi-categoria" onclick="fnDel('Elimi-categoria','/eliminacionCategorias/')" class="btn btn-danger btnEliminacion"> Eliminar</a> </td>
+              </tr>
+              {% endfor %}
+              
+              {% endif %}
+              </tbody>
+          </table>
+      </di>
+  </div>
+</div>
+
+{% endblock %}

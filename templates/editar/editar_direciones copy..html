@@ -1,0 +1,42 @@
+{% extends './index.html' %}
+
+{% block title %} Editar Cliente {% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h1>Edicion de Cliente</h1>
+        <div class="card">
+            <div class="card-body ">
+                <form action="/editarDirecc/" method="POST">{% csrf_token %}
+                    <div class="form-group py-2"> 
+                        <input type="text" id="txtdodigo" name="txtcodigot" value="{{direccion.id}}" class="form-control" placeholder="Direccion" readonly required>
+                    </div>  
+                    <div class="form-group py-2"> 
+                        <input type="text" id="txtdireccion" name="txtdirecciont" value="{{direccion.direccion}}" class="form-control" placeholder="Direccion"  required>
+                    </div>
+                    <div class="form-group py-2"> 
+                        <input type="text" id="txtbarrio" name="txtbarrio" value="{{direccion.barrio_sector}}" class="form-control" placeholder="Barrio/sector" required>
+                    </div>
+                    <div class="form-group py-2"> 
+                        <input type="text" id="txtciudad" name="txtciudad" value="{{direccion.ciudad}}" class="form-control" placeholder="Ciudad" required>
+                    </div>
+                    <div class="form-group py-2"> 
+                        <input type="text" id="txtdepartamento" name="txtdepartamento" value="{{direccion.departamento_provincia}}" class="form-control" placeholder="Departamento/estado" required>
+                    </div>
+                    <div class="form-group py-2"> 
+                        <input type="text" id="txtpostal" name="txtpostal" value="{{direccion.codigo_postal}}" class="form-control" placeholder="Codigo Postal" required>
+                    </div>
+                    
+                    <div class="form-group py-2"> 
+                        <button type="submit" class="btn-success btn-block text-while">Actualizar</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

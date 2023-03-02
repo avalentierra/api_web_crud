@@ -1,0 +1,82 @@
+
+{% extends './index.html' %}
+{% block title %} Editar Cliente {% endblock %}
+{% block content %}
+{% load static %}
+
+<html> 
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
+    </head>
+    <body> 
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h1>Edicion de Productos</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <form id="ESP" action="/editarProduct/" method="POST">{% csrf_token %}
+                            <div class="form-group "> 
+                                <input type="text" id="txtcodigoP" name="txtcodigoProducto"  value="{{producto.id}}"  class="form-control" placeholder="Nombre" required>
+                            </div>
+                            <div class="form-group "> 
+                                <input type="text" id="txtNombreP" name="txtNombreProducto"  value="{{producto.nombre_producto}}"  class="form-control" placeholder="Nombre" required>
+                            </div>
+                            <div class="form-group "> 
+                                <input type="text" id="txtPrecioP" name="txtPrecioProducto"  value="{{producto.precio_venta_producto}}"  class="form-control" placeholder="Precio" required>
+                            </div>
+                            <select class="form-control" id="categoria-id" name="categ"   >
+                                <option selected='selected' >{{producto.categoria}}</option>
+                            </select>
+                            <select class="form-control" id="descripcion-id" name="descrip" >
+                                <option selected='selected'  > {{producto.descripcion}} </option>
+                            </select>
+                        
+                            <div class="form-group py-2"> 
+                                <button type="submit" class="btn-success btn-block text-while">Guardar</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $(function(){
+                    $.ajax({
+                        type:'GET',
+                        url: 'http://127.0.0.1:8000/datosCategoria/',
+                        success:function(response){
+                            $.each(response,function(indice,fila){
+                                $('#categoria-id').append("<option value='"+fila.nombre_categoria+"'>"+fila.nombre_categoria+"</option>")
+                            });
+                            $('#categoria-id').select2();
+                        }
+                    });
+                });
+            });
+        </script> 
+        <script>
+            $(document).ready(function() {
+                $(function(){
+                    $.ajax({
+                        type:'GET',
+                        url: 'http://127.0.0.1:8000/datosDescripcion/',
+                        success:function(response){
+                            $.each(response,function(indice,fila){
+                                $('#descripcion-id').append("<option value='"+fila.descripcion_producto+"'>"+fila.descripcion_producto+"</option>")
+                            });
+                            $('#descripcion-id').select2();
+                        }
+                    });
+                });
+            });
+        </script> 
+    </body>
+</html>
+{% endblock %}

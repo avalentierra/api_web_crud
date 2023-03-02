@@ -1,0 +1,74 @@
+{% extends './index.html' %}
+{% block title %} REGISTAR PRODUCTO {% endblock %}
+{%  block content %}
+
+<html> 
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        
+        
+       
+    </head>
+    <body>
+        <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+            <div class="card">
+                <div class="card-body ">
+                    <form action="/registrarColor/" method="POST">{% csrf_token %}
+                        
+                        <div class="form-group py-2"> 
+                            <input type="text" id="txtNombreC" name="txtNombreColor" class="form-control" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group py-2"> 
+                            <button type="submit" class="btn-success btn-block text-while">Guardar</button>
+                        </div>
+
+                    </form>
+                    
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8"> 
+            <div class="table-responsive py-2"> 
+                <table class="table table-stiped">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th colspan="2">Opciones</th>
+                    
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if colores %}
+                    {% for color in colores %}
+                    
+                    <tr>
+                        <td scope="row">{{color.id}}</td>
+                        <td> {{color.nombre_color}}</td>
+                        <td><a  href="/edicionColores/{{color.id}}" class="btn btn-info"> Editar</a> </td>
+                        <td><a id="Elimi-color" onclick="fnDel('Elimi-color','/eliminacionColores/')" class="btn btn-danger btnEliminacion"> Eliminar</a> </td>
+                    </tr>
+                    {% endfor %}
+                    
+                    {% endif %}
+                    </tbody>
+                </table>
+            </di>
+        </div>
+        </div>
+        
+       
+    
+    </body>
+</html>
+
+{% endblock %}

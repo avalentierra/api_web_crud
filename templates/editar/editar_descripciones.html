@@ -1,0 +1,30 @@
+{% extends './index.html' %}
+
+{% block title %} Editar Cliente {% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h1>Edicion de Categoria</h1>
+        <div class="card">
+            <div class="card-body ">
+                <form action="/editarDescript/" method="POST">{% csrf_token %}
+                    <div class="form-group py-2"> 
+                        <input type="text" id="txtdodigo" name="txtcodigot" value="{{descripcion.id}}" class="form-control" placeholder="Codigo" readonly required>
+                    </div>  
+                    <div class="form-group py-2"> 
+                        <input type="text" id="txtcdescripcion" name="txtdescripciont" value="{{descripcion.descripcion_producto}}" class="form-control" placeholder="Nombre Descripcion"  required>
+                    </div>
+                   
+                    <div class="form-group py-2"> 
+                        <button type="submit" class="btn-success btn-block text-while">Actualizar</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

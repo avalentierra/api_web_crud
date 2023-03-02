@@ -1,0 +1,29 @@
+user-admin: root
+email-admin: runsmok@gmail.com
+pas-admin: Alifer...
+
+base de datos 
+db_api_web
+
+// crear entorno virtual para instalar librerias
+python -m venv nomvre_entorno
+
+
+// para crear un nuevo proyecto
+django-admin startproject nombre_proyecto
+
+// para crear una nueva app o modulo del proyecto
+django-admin startapp nombre_app o mudulo
+
+// correr o ejecutar el servidor de django
+python manage.py runserver
+
+// migrar el proyecto
+python manage.py migrate
+
+// migrar el modelo de las tablas a la base de datos
+python manage.py makemigrations
+
+// crear usuario para administrar la base de datos 
+
+python manage.py createsuperuser

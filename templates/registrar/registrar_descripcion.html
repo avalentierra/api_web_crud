@@ -1,0 +1,106 @@
+{% extends './index.html' %}
+{% block title %} REGISTAR PRODUCTO {% endblock %}
+{%  block content %}
+
+<html> 
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        
+        
+       
+    </head>
+    <body>
+        <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+            <div class="card">
+                <div class="card-body ">
+                    <form action="/registrarDescript/" method="POST">{% csrf_token %}
+                        
+                       
+                        <div class="form-group py-2"> 
+                            <input type="text" id="txtnombreP" name="txtDescripcion" class="form-control" placeholder="Nombre Descripcion" required>
+                        </div>
+                        <div class="form-group py-2"> 
+                            <button type="submit" class="btn-success btn-block text-while">Guardar</button>
+                        </div>
+
+                    </form>
+                    
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8"> 
+            <div class="table-responsive py-2"> 
+                <table class="table table-stiped">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Descripcion</th>
+                        <th colspan="2">Opciones</th>
+                    
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if descripciones %}
+                    {% for descripcion in descripciones %}
+                    
+                    <tr>
+                        <td scope="row">{{descripcion.id}}</td>
+                        <td> {{descripcion.descripcion_producto}}</td>
+                        
+                        <td><a  href="/edicionDescripciones/{{descripcion.id}}" class="btn btn-info"> Editar</a> </td>
+                        <td><a  id="Elimi-descripcion" onclick="fnDel('Elimi-descripcion','/eliminacionDescripciones/')"class="btn btn-danger btnEliminacion"> Eliminar</a> </td>
+                    </tr>
+                    {% endfor %}
+                    
+                    {% endif %}
+                    </tbody>
+                </table>
+            </di>
+        </div>
+        </div>
+        
+        <script >
+            $(document).ready(function() {
+                $(function(){
+
+                    $.ajax({
+                        type:'GET',
+                        url: 'http://127.0.0.1:8000/datosc/',
+                        success:function(response){
+                            $.each(response,function(indice,fila){
+                                $('#buscar').append("<option value='"+fila.nombre_categoria+"'>"+fila.nombre_categoria+"</option>")
+
+                            });
+                            $('#buscar').select2();
+
+                        }
+
+                    });
+
+                });
+                
+            });
+        </script>
+
+        <script>
+            $('#buscar').on('change',function(){
+                var valor=this.value;
+                var texto=$(this).find('option:selected').text();
+                $('').text(texto);
+            });
+             
+        </script>
+    
+    </body>
+</html>
+
+{% endblock %}
